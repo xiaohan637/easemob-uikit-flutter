@@ -246,9 +246,15 @@ class MessageListViewController extends ChangeNotifier
     if (list.isNotEmpty) {
       _clearMention(list);
       if (onBottom) {
+        list.removeWhere((e){
+         return msgModelList.any((m)=>m.id==e.id);
+        });
         msgModelList.insertAll(0, list.reversed);
         lastActionType = MessageLastActionType.bottomPosition;
       } else {
+        list.removeWhere((e){
+          return msgModelList.any((m)=>m.id==e.id);
+        });
         cacheMessages.addAll(list.reversed);
         lastActionType = MessageLastActionType.originalPosition;
       }

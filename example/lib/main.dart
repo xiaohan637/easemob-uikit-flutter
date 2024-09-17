@@ -18,7 +18,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import 'pages/me/settings/advanced_page.dart';
 
-const appKey = 'easemob#easeim';
+const appKey = '1172240914169630#jdd';
 
 const bool appDebug = false;
 
@@ -77,7 +77,7 @@ class _MyAppState extends State<MyApp> {
         builder: EasyLoading.init(
           builder: (context, child) {
             return ChatUIKitTheme(
-              font: ChatUIKitFont(fontSize: ChatUIKitFontSize.superLarge),
+              font: ChatUIKitFont(),
               color: AppSettingsNotification.isLight ? ChatUIKitColor.light() : ChatUIKitColor.dark(),
               child: child!,
             );

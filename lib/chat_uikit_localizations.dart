@@ -517,7 +517,7 @@ mixin ChatUIKitLocal {
     selectContactViewSearchHint: '搜索联系人',
     nonSupportMessage: '不支持的消息类型',
     conversationListItemMention: '有人@我',
-    listViewLoadFailed: '加载失败',
+    listViewLoadFailed: '暂无数据',
     listViewReload: '重新加载',
     quoteWidgetTitleImage: '图片',
     quoteWidgetTitleVideo: '视频',

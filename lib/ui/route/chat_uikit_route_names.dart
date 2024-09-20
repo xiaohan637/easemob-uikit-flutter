@@ -18,6 +18,7 @@ class ChatUIKitRouteNames {
   static const String groupMentionView = '/GroupMentionView';
   static const String groupDeleteMembersView = '/GroupDeleteMembersView';
   static const String groupAddMembersView = '/GroupAddMembersView';
+  static const String groupAdminMembersView = '/GroupAdminMembersView';
   static const String messagesView = '/MessagesView';
   static const String newRequestDetailsView = '/NewRequestDetailsView';
   static const String newRequestsView = '/NewRequestsView';

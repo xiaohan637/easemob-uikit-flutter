@@ -17,7 +17,7 @@ class GroupMemberListViewController
 
   /// 会话列表显示前的回调，你可以在这里对会话列表进行处理，比如排序或者加减等。如果不设置将会直接显示。
   final ContactListViewShowHandler? willShowHandler;
-
+  List<ContactItemModel>  adminList = [];
   @override
   void dispose() {
     ChatUIKitProvider.instance.removeObserver(this);
@@ -50,6 +50,12 @@ class GroupMemberListViewController
       List<String> userIds = ret;
       if (includeOwner) {
         Group? group = await ChatUIKit.instance.getGroup(groupId: groupId);
+          if(group?.adminList!=null && group!.adminList!.isNotEmpty){
+          final  ads = group.adminList!;
+          List<ContactItemModel> tmp = mappers(ads);
+          adminList = tmp;
+          }
+
         if (group?.owner?.isNotEmpty == true) {
           userIds.insert(0, group!.owner!);
         }

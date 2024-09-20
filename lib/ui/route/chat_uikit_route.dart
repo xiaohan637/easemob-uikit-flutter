@@ -3,6 +3,8 @@ import 'package:em_chat_uikit/universal/inner_headers.dart';
 
 import 'package:flutter/material.dart';
 
+import '../views/group_members_admin.dart';
+
 typedef ChatUIKitWidgetBuilder = Widget Function(
   BuildContext context,
   Object? arguments,
@@ -122,6 +124,7 @@ class ChatUIKitRoute {
         arguments as GroupAddMembersViewArguments,
       );
     },
+
     ChatUIKitRouteNames.groupDeleteMembersView: (context, arguments) {
       return GroupDeleteMembersView.arguments(
         arguments as GroupDeleteMembersViewArguments,

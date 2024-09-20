@@ -1,6 +1,7 @@
 import 'package:em_chat_uikit/chat_uikit.dart';
 
 import 'package:flutter/material.dart';
+import 'package:im_flutter_sdk/im_flutter_sdk.dart';
 
 class GroupMemberListView extends StatefulWidget {
   const GroupMemberListView({

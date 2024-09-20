@@ -1,4 +1,5 @@
 import 'package:em_chat_uikit/chat_uikit.dart';
+import 'package:em_chat_uikit/ui/views/group_members_admin.dart';
 
 import 'package:flutter/material.dart';
 
@@ -126,8 +127,26 @@ class _GroupMembersViewState extends State<GroupMembersView>
                 showBackButton: true,
                 trailingActions: () {
                   List<ChatUIKitAppBarTrailingAction> actions = [];
+                    if(group?.permissionType == GroupPermissionType.Owner){
+                      actions.add(
+                        ChatUIKitAppBarTrailingAction(
+                          actionType: ChatUIKitActionType.custom,
+                          onTap: (context) {
 
-                  if (group?.permissionType == GroupPermissionType.Owner) {
+                          },
+                          child: Icon(
+                            Icons.admin_panel_settings,
+                            color: theme.color.isDark
+                                ? theme.color.neutralColor9
+                                : theme.color.neutralColor3,
+                            size: 24,
+                          ),
+                        ),
+                      );
+                    }
+
+
+                  if (group?.permissionType == GroupPermissionType.Owner ||group?.permissionType == GroupPermissionType.Admin  ) {
                     actions.add(
                       ChatUIKitAppBarTrailingAction(
                         actionType: ChatUIKitActionType.add,
@@ -308,7 +327,6 @@ class _GroupMembersViewState extends State<GroupMembersView>
 
   void pushToAddMember() async {
     List<ChatUIKitProfile> members = [];
-
     List list = controller.list;
     for (var element in list) {
       if (element is ContactItemModel) {
@@ -340,6 +358,35 @@ class _GroupMembersViewState extends State<GroupMembersView>
         controller.list.addAll(models);
         controller.refresh();
       }
+    }).catchError((e) {});
+  }
+  void pushToAdminMember() async {
+    List<ChatUIKitProfile> adminMembers = [];
+    List list = controller.adminList;
+    for (var element in list) {
+      if (element is ContactItemModel) {
+        adminMembers.add(element.profile);
+      }
+    }
+    List<ChatUIKitProfile> members = [];
+    for (var element in controller.list) {
+      if (element is ContactItemModel) {
+        members.add(element.profile);
+      }
+    }
+    Navigator.push(context, MaterialPageRoute(builder: (_)=>GroupMembersAdmin(
+      members: members,
+      adminMembers: adminMembers,)));
+    ChatUIKitRoute.pushOrPushNamed(
+      context,
+      ChatUIKitRouteNames.groupAdminMembersView,
+      GroupAdminMembersViewArguments(
+        groupId: widget.profile.id,
+        profiles: members,
+        adminProfiles: adminMembers
+      ) as ChatUIKitViewArguments,
+    ).then((value) {
+      controller.refresh();
     }).catchError((e) {});
   }
 

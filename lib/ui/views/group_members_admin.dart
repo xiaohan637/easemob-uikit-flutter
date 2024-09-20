@@ -61,7 +61,7 @@ class _GroupMembersAdminState extends State<GroupMembersAdmin> {
       body: ListView.builder(
           itemCount:allMembers.length ,
           itemBuilder: (context,index){
-            final ChatUIKitProfile profile = members[index];
+            final ChatUIKitProfile profile = allMembers[index];
             final admin = adminMembers.any((e)=>e.id==profile.id);
             final groupPre = widget.ow==profile.id;
             return CheckboxListTile(value:admin,

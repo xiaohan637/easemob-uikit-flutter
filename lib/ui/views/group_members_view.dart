@@ -132,7 +132,7 @@ class _GroupMembersViewState extends State<GroupMembersView>
                         ChatUIKitAppBarTrailingAction(
                           actionType: ChatUIKitActionType.custom,
                           onTap: (context) {
-
+                            pushToAdminMember();
                           },
                           child: Icon(
                             Icons.admin_panel_settings,

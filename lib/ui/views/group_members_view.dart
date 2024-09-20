@@ -376,6 +376,7 @@ class _GroupMembersViewState extends State<GroupMembersView>
     }
     Navigator.push(context, MaterialPageRoute(builder: (_)=>GroupMembersAdmin(
       members: members,
+      groupId: widget.profile.id,
       adminMembers: adminMembers,)));
     ChatUIKitRoute.pushOrPushNamed(
       context,

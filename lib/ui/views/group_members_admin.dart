@@ -1,4 +1,6 @@
 import 'package:em_chat_uikit/provider/chat_uikit_profile.dart';
+import 'package:em_chat_uikit/ui/route/chat_uikit_view_observer.dart';
+import 'package:em_chat_uikit/ui/route/view_arguments/view_arguments_base.dart';
 import 'package:em_chat_uikit/universal/chat_uikit_action_model.dart';
 import 'package:flutter/material.dart';
 import 'package:im_flutter_sdk/im_flutter_sdk.dart';
@@ -75,7 +77,7 @@ class _GroupMembersAdminState extends State<GroupMembersAdmin> {
 
 }
 
-class GroupAdminMembersViewArguments {
+class GroupAdminMembersViewArguments implements ChatUIKitViewArguments{
   final String groupId;
   final   List<ChatUIKitProfile> members;
   final   List<ChatUIKitProfile> adminMembers;
@@ -85,4 +87,10 @@ class GroupAdminMembersViewArguments {
       {required this.groupId,
         required this.adminMembers,
         required this.members,});
+
+  @override
+  String? attributes;
+
+  @override
+  ChatUIKitViewObserver? viewObserver;
 }

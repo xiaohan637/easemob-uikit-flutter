@@ -381,7 +381,7 @@ class _GroupMembersViewState extends State<GroupMembersView>
       GroupAdminMembersViewArguments(
         groupId: widget.profile.id,
          adminMembers: adminMembers, members: members
-      ) as ChatUIKitViewArguments,
+      ),
     ).then((value) {
       controller.refresh();
     }).catchError((e) {});

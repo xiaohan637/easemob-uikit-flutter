@@ -361,25 +361,28 @@ class _GroupMembersViewState extends State<GroupMembersView>
     }).catchError((e) {});
   }
   void pushToAdminMember() async {
+    Group? group = await ChatUIKit.instance.getGroup(groupId: widget.profile.id);
     List<ChatUIKitProfile> adminMembers = [];
-    List list = controller.adminList;
-    for (var element in list) {
-      if (element is ContactItemModel) {
-        adminMembers.add(element.profile);
-      }
-    }
     List<ChatUIKitProfile> members = [];
-    for (var element in controller.list) {
-      if (element is ContactItemModel) {
-        members.add(element.profile);
+    if(group!=null){
+
+      for (var element in ( group.adminList??[])) {
+        if (element is ContactItemModel) {
+          adminMembers.add(element.profile);
+        }
+      }
+      for (var element in (group.memberList??[])) {
+        if (element is ContactItemModel) {
+          members.add(element.profile);
+        }
       }
     }
-
     ChatUIKitRoute.pushOrPushNamed(
       context,
       ChatUIKitRouteNames.groupAdminMembersView,
       GroupAdminMembersViewArguments(
         groupId: widget.profile.id,
+         ow: group?.owner,
          adminMembers: adminMembers, members: members
       ),
     ).then((value) {

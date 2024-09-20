@@ -5,6 +5,7 @@ class GroupDetailsViewArguments implements ChatUIKitViewArguments {
   GroupDetailsViewArguments({
     required this.profile,
     this.actionsBuilder,
+    this.onTap,
     this.appBar,
     this.enableAppBar = true,
     this.onMessageDidClear,
@@ -18,6 +19,7 @@ class GroupDetailsViewArguments implements ChatUIKitViewArguments {
   final ChatUIKitAppBar? appBar;
   final bool enableAppBar;
   final VoidCallback? onMessageDidClear;
+  final VoidCallback? onTap;
   final WidgetBuilder? contentWidgetBuilder;
 
   @override

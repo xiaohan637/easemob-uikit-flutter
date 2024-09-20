@@ -45,7 +45,6 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     super.build(context);
     final theme = ChatUIKitTheme.of(context);
-
     Widget content = Scaffold(
       body: IndexedStack(
         index: _currentIndex,

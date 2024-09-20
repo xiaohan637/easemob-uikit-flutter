@@ -14,14 +14,17 @@ class GroupDetailsView extends StatefulWidget {
         enableAppBar = arguments.enableAppBar,
         actionsBuilder = arguments.actionsBuilder,
         onMessageDidClear = arguments.onMessageDidClear,
+        onTap = arguments.onTap,
         viewObserver = arguments.viewObserver,
         appBarTrailingActionsBuilder = arguments.appBarTrailingActionsBuilder,
         contentWidgetBuilder = arguments.contentWidgetBuilder,
         attributes = arguments.attributes;
 
+
   const GroupDetailsView({
     required this.profile,
     this.actionsBuilder,
+    this.onTap,
     this.appBar,
     this.enableAppBar = true,
     this.attributes,
@@ -37,6 +40,7 @@ class GroupDetailsView extends StatefulWidget {
   final bool enableAppBar;
   final String? attributes;
   final VoidCallback? onMessageDidClear;
+  final VoidCallback? onTap;
   final WidgetBuilder? contentWidgetBuilder;
 
   /// 用于刷新页面的Observer
@@ -699,6 +703,7 @@ class _GroupDetailsViewState extends State<GroupDetailsView>
   Widget statusAvatar() {
     // 暂时不需要订阅
     return ChatUIKitAvatar(
+      onTap: widget.onTap,
       avatarUrl: profile!.avatarUrl,
       size: 100,
     );

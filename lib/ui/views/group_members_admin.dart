@@ -6,7 +6,16 @@ import 'package:im_flutter_sdk/im_flutter_sdk.dart';
 import '../widgets/chat_uikit_app_bar.dart';
 
 class GroupMembersAdmin extends StatefulWidget {
-  const GroupMembersAdmin({super.key, required this.members, required this.adminMembers, required this.groupId});
+  const GroupMembersAdmin({ required this.members,
+    required this.adminMembers,
+    required this.groupId,
+    super.key});
+
+  GroupMembersAdmin.arguments(GroupAdminMembersViewArguments arguments, {Key? key})
+      : members = arguments.members,
+        adminMembers = arguments.adminMembers,
+        groupId = arguments.groupId,
+        super(key: key);
 
   final  List<ChatUIKitProfile> members;
   final  List<ChatUIKitProfile> adminMembers;
@@ -68,12 +77,12 @@ class _GroupMembersAdminState extends State<GroupMembersAdmin> {
 
 class GroupAdminMembersViewArguments {
   final String groupId;
-  final   List<ChatUIKitProfile> profiles;
-  final   List<ChatUIKitProfile> adminProfiles;
+  final   List<ChatUIKitProfile> members;
+  final   List<ChatUIKitProfile> adminMembers;
 
   GroupAdminMembersViewArguments(
 
       {required this.groupId,
-        required this.adminProfiles,
-        required this.profiles,});
+        required this.adminMembers,
+        required this.members,});
 }

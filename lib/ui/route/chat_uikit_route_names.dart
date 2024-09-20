@@ -1,4 +1,5 @@
 import 'package:em_chat_uikit/chat_uikit.dart';
+import 'package:em_chat_uikit/ui/views/group_members_admin.dart';
 
 import 'package:flutter/widgets.dart';
 
@@ -107,6 +108,10 @@ class ChatUIKitRouteNames {
       case ChatUIKitRouteNames.groupAddMembersView:
         return GroupAddMembersView.arguments(
           arguments as GroupAddMembersViewArguments,
+        );
+        case ChatUIKitRouteNames.groupAdminMembersView:
+        return GroupMembersAdmin.arguments(
+          arguments as GroupAdminMembersViewArguments,
         );
       case ChatUIKitRouteNames.messagesView:
         return MessagesView.arguments(

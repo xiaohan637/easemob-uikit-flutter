@@ -374,17 +374,13 @@ class _GroupMembersViewState extends State<GroupMembersView>
         members.add(element.profile);
       }
     }
-    Navigator.push(context, MaterialPageRoute(builder: (_)=>GroupMembersAdmin(
-      members: members,
-      groupId: widget.profile.id,
-      adminMembers: adminMembers,)));
+
     ChatUIKitRoute.pushOrPushNamed(
       context,
       ChatUIKitRouteNames.groupAdminMembersView,
       GroupAdminMembersViewArguments(
         groupId: widget.profile.id,
-        profiles: members,
-        adminProfiles: adminMembers
+         adminMembers: adminMembers, members: members
       ) as ChatUIKitViewArguments,
     ).then((value) {
       controller.refresh();

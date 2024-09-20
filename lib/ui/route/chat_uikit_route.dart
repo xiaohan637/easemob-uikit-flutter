@@ -124,6 +124,11 @@ class ChatUIKitRoute {
         arguments as GroupAddMembersViewArguments,
       );
     },
+        ChatUIKitRouteNames.groupAdminMembersView: (context, arguments) {
+      return GroupMembersAdmin.arguments(
+        arguments as GroupAdminMembersViewArguments,
+      );
+    },
 
     ChatUIKitRouteNames.groupDeleteMembersView: (context, arguments) {
       return GroupDeleteMembersView.arguments(

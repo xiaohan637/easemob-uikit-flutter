@@ -32,12 +32,13 @@ class GroupMembersAdmin extends StatefulWidget {
 class _GroupMembersAdminState extends State<GroupMembersAdmin> {
   late List<ChatUIKitProfile> members;
   late List<ChatUIKitProfile> adminMembers;
+  late List<ChatUIKitProfile> allMembers;
 
   @override
   void initState() {
     members = widget.members;
     adminMembers = widget.adminMembers;
-
+    allMembers = [...widget.adminMembers,...widget.members];
     super.initState();
   }
   @override
@@ -58,7 +59,7 @@ class _GroupMembersAdminState extends State<GroupMembersAdmin> {
         ),
       ),
       body: ListView.builder(
-          itemCount:members.length ,
+          itemCount:allMembers.length ,
           itemBuilder: (context,index){
             final ChatUIKitProfile profile = members[index];
             final admin = adminMembers.any((e)=>e.id==profile.id);

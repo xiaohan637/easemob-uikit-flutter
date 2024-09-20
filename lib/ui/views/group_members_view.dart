@@ -61,6 +61,7 @@ class GroupMembersView extends StatefulWidget {
   /// 用于刷新页面的Observer
   final ChatUIKitViewObserver? viewObserver;
   final ChatUIKitAppBarTrailingActionsBuilder? appBarTrailingActionsBuilder;
+
   @override
   State<GroupMembersView> createState() => _GroupMembersViewState();
 }
@@ -72,6 +73,7 @@ class _GroupMembersViewState extends State<GroupMembersView>
   List<ContactItemModel>? deleteBuffer;
   ValueNotifier<int> memberCount = ValueNotifier<int>(0);
   Group? group;
+
   @override
   void initState() {
     super.initState();
@@ -127,26 +129,26 @@ class _GroupMembersViewState extends State<GroupMembersView>
                 showBackButton: true,
                 trailingActions: () {
                   List<ChatUIKitAppBarTrailingAction> actions = [];
-                    if(group?.permissionType == GroupPermissionType.Owner){
-                      actions.add(
-                        ChatUIKitAppBarTrailingAction(
-                          actionType: ChatUIKitActionType.custom,
-                          onTap: (context) {
-                            pushToAdminMember();
-                          },
-                          child: Icon(
-                            Icons.admin_panel_settings,
-                            color: theme.color.isDark
-                                ? theme.color.neutralColor9
-                                : theme.color.neutralColor3,
-                            size: 24,
-                          ),
+                  if (group?.permissionType == GroupPermissionType.Owner) {
+                    actions.add(
+                      ChatUIKitAppBarTrailingAction(
+                        actionType: ChatUIKitActionType.custom,
+                        onTap: (context) {
+                          pushToAdminMember();
+                        },
+                        child: Icon(
+                          Icons.admin_panel_settings,
+                          color: theme.color.isDark
+                              ? theme.color.neutralColor9
+                              : theme.color.neutralColor3,
+                          size: 24,
                         ),
-                      );
-                    }
+                      ),
+                    );
+                  }
 
-
-                  if (group?.permissionType == GroupPermissionType.Owner ||group?.permissionType == GroupPermissionType.Admin  ) {
+                  if (group?.permissionType == GroupPermissionType.Owner ||
+                      group?.permissionType == GroupPermissionType.Admin) {
                     actions.add(
                       ChatUIKitAppBarTrailingAction(
                         actionType: ChatUIKitActionType.add,
@@ -360,19 +362,25 @@ class _GroupMembersViewState extends State<GroupMembersView>
       }
     }).catchError((e) {});
   }
+
   void pushToAdminMember() async {
-    Group? group = await ChatUIKit.instance.getGroup(groupId: widget.profile.id);
+    Group? group =
+        await ChatUIKit.instance.getGroup(groupId: widget.profile.id);
     List<ChatUIKitProfile> adminMembers = [];
     List<ChatUIKitProfile> members = [];
-    if(group!=null){
+    print("===${group?.memberList}");
+    print("===${group?.adminList}");
 
-      for (var element in ( group.adminList??[])) {
-        if (element is ContactItemModel) {
+    if (group != null) {
+      if (group.adminList != null) {
+        List<ContactItemModel> tmp = controller.mappers(group.adminList!);
+        for (var element in tmp) {
           adminMembers.add(element.profile);
         }
       }
-      for (var element in (group.memberList??[])) {
-        if (element is ContactItemModel) {
+      if (group.memberList != null) {
+        List<ContactItemModel> tmp = controller.mappers(group.memberList!);
+        for (var element in tmp) {
           members.add(element.profile);
         }
       }
@@ -381,10 +389,10 @@ class _GroupMembersViewState extends State<GroupMembersView>
       context,
       ChatUIKitRouteNames.groupAdminMembersView,
       GroupAdminMembersViewArguments(
-        groupId: widget.profile.id,
-         ow: group?.owner,
-         adminMembers: adminMembers, members: members
-      ),
+          groupId: widget.profile.id,
+          ow: group?.owner,
+          adminMembers: adminMembers,
+          members: members),
     ).then((value) {
       controller.refresh();
     }).catchError((e) {});
